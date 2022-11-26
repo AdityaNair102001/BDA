@@ -1,1 +1,49 @@
 https://mesquite-acapella-8e2.notion.site/IS-Ans-e6e3464b9e0c4bc49b8955edddd80614
+https://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/
+https://phoenixnap.com/kb/install-hadoop-ubuntu
+
+#!/usr/bin/python3
+"""mapper.py"""
+
+import sys
+for line in sys.stdin:
+    line=line.strip()
+    words=line.split()
+    for word in words:
+        print('%s\t%s'%(word,1))
+
+
+
+
+
+
+
+
+
+#!/usr/bin/python3
+
+"""reducer.py"""
+
+import sys
+prev_word=None
+prev_count=0
+
+for line in sys.stdin:
+    line=line.strip()
+    word,count=line.split('\t')
+    
+    count=int(count)
+    
+    if prev_word==word:
+       prev_count+=count
+    else:
+       if prev_word:
+          print('%s\t%s'%(prev_word,prev_count))
+       prev_count=count
+       prev_word=word
+if prev_word==word:
+   print('%s\t%s'%(prev_word,prev_count))
+
+
+
+
